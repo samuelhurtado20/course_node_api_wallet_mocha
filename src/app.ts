@@ -1,23 +1,26 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 process.env.APP_ENV = process.env.APP_ENV || 'production'
 
-import * as express from "express";
+import express from "express";
 import * as dotenv from 'dotenv'
-import { TestService } from "./services/test.service";
-import { container } from "./container";
+import loadContainer from "./container";
+import { loadControllers } from "awilix-express";
 
+const app: express.Application = express();
+
+//config envirotment
 dotenv.config({
     path: `${__dirname}/../config/${process.env.APP_ENV}.env`
 })
 console.log(process.env.CONN)
 
-const app =  express();
+//container
+loadContainer(app)
 
-app.get('/', (_req, res)=>{
-    res.sendStatus(400)
-})
-
-const testService = container.resolve<TestService>('testService')
-console.log(testService.get())
+//controllers
+app.use(loadControllers(
+    'controllers/*.ts',
+    { cwd: __dirname }
+))
 
 export { app }
