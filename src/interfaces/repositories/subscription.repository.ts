@@ -1,6 +1,6 @@
-import { Subscription } from './domain/subscription'
+import { Subscription } from '../models/subscription'
 
-export interface SubscriptionRepository{
+export interface ISubscriptionRepository{
 
     all(): Promise<Subscription[]>
 

@@ -1,6 +1,6 @@
-import { Balance } from './domain/balance'
+import { Balance } from '../models/balance'
 
-export interface BalanceRepository{
+export interface IBalanceRepository{
 
     all(): Promise<Balance[]>
 

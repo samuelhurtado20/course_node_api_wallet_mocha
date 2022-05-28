@@ -1,8 +1,8 @@
-import db from '../../../../common/persistence/pg.persistence'
-import { BalanceRepository } from '../../balance.repository'
-import { Balance } from '../../domain/balance'
+import db from '../../common/persistence/pg.persistence'
+import { IBalanceRepository } from '../../interfaces/repositories/balance.repository'
+import { Balance } from '../../interfaces/models/balance'
 
-export class BalancePgRepository implements BalanceRepository {
+export class BalancePgRepository implements IBalanceRepository {
   public async all (): Promise<Balance[]> {
     const rows = await db.query('select * from wallet_balance order by id desc')
     return rows.rows as Balance[]
@@ -18,7 +18,7 @@ export class BalancePgRepository implements BalanceRepository {
   }
 
   public async findByUserId (userId: number): Promise<Balance | null> {
-    const row = await db.query('select * from wallet_balance where user_id = $1 and code = $2', [userId])
+    const row = await db.query('select * from wallet_balance where user_id = $1', [userId])
     if (row.rows.length) {
       return row.rows[0] as Balance
     }
@@ -27,7 +27,7 @@ export class BalancePgRepository implements BalanceRepository {
 
   public async store (entry: Balance): Promise<void> {
     const now = new Date(Date.now())
-    await db.query('insert into wallet_balance(user_id, amount, created_at) values($1,$2,$3,$4)',
+    await db.query('insert into wallet_balance(user_id, amount, created_at) values($1,$2,$3)',
       [entry.userId, entry.amount, now])
   }
 

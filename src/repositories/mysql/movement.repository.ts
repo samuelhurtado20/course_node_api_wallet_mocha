@@ -1,26 +1,26 @@
-import db from '../../../../common/persistence/pg.persistence'
-import { Movement } from '../../domain/movement'
-import { MovementRepository } from '../../movement.repository'
+import db from '../../common/persistence/mysql.persistence'
+import { Movement } from '../../interfaces/models/movement'
+import { IMovementRepository } from '../../interfaces/repositories/movement.repository'
 
-export class MovementPgRepository implements MovementRepository {
+export class MovementMysqlRepository implements IMovementRepository {
   public async all (): Promise<Movement[]> {
-    const rows = await db.query('select * from wallet_movement order by id desc')
-    return rows.rows as Movement[]
+    const [rows]:any[] = await db.query('select * from wallet_movement order by id desc')
+    return rows as Movement[]
   }
 
   public async find (id: number): Promise<Movement | null> {
-    const row = await db.query('select * from wallet_movement where id = $1',
+    const [rows]:any[] = await db.query('select * from wallet_movement where id = $1',
       [id])
-    if (row.rows.length) {
-      return row.rows[0] as Movement
+    if (rows.length) {
+      return rows[0] as Movement
     }
     return null
   }
 
   public async findByUserId (userId: number): Promise<Movement | null> {
-    const row = await db.query('select * from wallet_movement where user_id = $1 and code = $2', [userId])
-    if (row.rows.length) {
-      return row.rows[0] as Movement
+    const [rows]:any[] = await db.query('select * from wallet_movement where user_id = $1', [userId])
+    if (rows.length) {
+      return rows[0] as Movement
     }
     return null
   }

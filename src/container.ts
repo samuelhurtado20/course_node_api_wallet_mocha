@@ -2,10 +2,10 @@ import express from 'express'
 import { createContainer, asClass } from 'awilix'
 import { TestService } from './services/test.service'
 import { scopePerRequest } from 'awilix-express'
-import { SubscriptionPgRepository } from './services/repositories/impl/pg/subscription.repository'
+import { SubscriptionPgRepository } from './repositories/pg/subscription.repository'
 import { SubscriptionService } from './services/subscription.service'
-import { MovementPgRepository } from './services/repositories/impl/pg/movement.repository'
-import { BalancePgRepository } from './services/repositories/impl/pg/balance.repository'
+import { MovementPgRepository } from './repositories/pg/movement.repository'
+import { BalancePgRepository } from './repositories/pg/balance.repository'
 import { MovementService } from './services/movement.service'
 
 export default (app: express.Application) => {

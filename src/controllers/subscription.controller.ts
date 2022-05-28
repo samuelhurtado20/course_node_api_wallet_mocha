@@ -2,7 +2,7 @@ import { GET, route, POST, PUT, DELETE } from 'awilix-express'
 import { Request, Response } from 'express'
 import { BaseController } from '../common/controllers/base.controller'
 import { ApplicationException } from '../common/exceptions/application.exception'
-import { SubscriptionCreateDto, SubscriptionUpdateDto } from '../dtos/subscription.dto'
+import { SubscriptionCreateDto, SubscriptionUpdateDto } from '../interfaces/dtos/subscription.dto'
 import { SubscriptionService } from '../services/subscription.service'
 
 @route('/subscriptions')

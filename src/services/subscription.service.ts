@@ -1,7 +1,7 @@
 import { ApplicationException } from '../common/exceptions/application.exception'
-import { SubscriptionCreateDto, SubscriptionUpdateDto } from '../dtos/subscription.dto'
-import { Subscription } from './repositories/domain/subscription'
-import { SubscriptionPgRepository } from './repositories/impl/pg/subscription.repository'
+import { SubscriptionCreateDto, SubscriptionUpdateDto } from '../interfaces/dtos/subscription.dto'
+import { Subscription } from '../interfaces/models/subscription'
+import { SubscriptionPgRepository } from '../repositories/pg/subscription.repository'
 
 export class SubscriptionService {
   constructor (private readonly subscriptionRepository: SubscriptionPgRepository) { }

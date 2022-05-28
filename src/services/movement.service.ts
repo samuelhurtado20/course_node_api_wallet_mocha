@@ -1,15 +1,15 @@
 import { MovementType } from '../common/enums/movement-type'
 import { ApplicationException } from '../common/exceptions/application.exception'
-import { MovementCreateDto } from '../dtos/movement.dto'
-import { BalanceRepository } from './repositories/balance.repository'
-import { Balance } from './repositories/domain/balance'
-import { Movement } from './repositories/domain/movement'
-import { MovementRepository } from './repositories/movement.repository'
+import { MovementCreateDto } from '../interfaces/dtos/movement.dto'
+import { IBalanceRepository } from '../interfaces/repositories/balance.repository'
+import { Balance } from '../interfaces/models/balance'
+import { Movement } from '../interfaces/models/movement'
+import { IMovementRepository } from '../interfaces/repositories/movement.repository'
 
 export class MovementService {
   constructor (
-        private readonly movementRepository: MovementRepository,
-        private readonly balanceRepository: BalanceRepository
+        private readonly movementRepository: IMovementRepository,
+        private readonly balanceRepository: IBalanceRepository
   ) { }
 
   public async find (id: number): Promise<Movement | null> {

@@ -1,4 +1,4 @@
-import { MovementType } from '../common/enums/movement-type'
+import { MovementType } from '../../common/enums/movement-type'
 
 export interface MovementCreateDto {
     type: MovementType

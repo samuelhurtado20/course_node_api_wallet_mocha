@@ -1,8 +1,8 @@
-import db from '../../../../common/persistence/pg.persistence'
-import { Subscription } from '../../domain/subscription'
-import { SubscriptionRepository } from '../../subscription.repository'
+import db from '../../common/persistence/pg.persistence'
+import { Subscription } from '../../interfaces/models/subscription'
+import { ISubscriptionRepository } from '../../interfaces/repositories/subscription.repository'
 
-export class SubscriptionPgRepository implements SubscriptionRepository {
+export class SubscriptionPgRepository implements ISubscriptionRepository {
   public async all (): Promise<Subscription[]> {
     const rows = await db.query('select * from wallet_subscription order by id desc')
     return rows.rows as Subscription[]

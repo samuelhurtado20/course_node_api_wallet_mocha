@@ -1,6 +1,6 @@
-import { Movement } from './domain/movement'
+import { Movement } from '../models/movement'
 
-export interface MovementRepository{
+export interface IMovementRepository {
 
     all(): Promise<Movement[]>
 
