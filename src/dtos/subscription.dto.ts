@@ -1,6 +1,6 @@
 export interface SubscriptionCreateDto{
     code: string,
-    user_id:number,
+    userId:number,
     amount:number,
     cron:string
 }

@@ -1,5 +1,5 @@
 const { Pool } = require('pg')
-var { config } = require('dotenv')
+const { config } = require('dotenv')
 config()
 
 export default new Pool({
@@ -9,4 +9,4 @@ export default new Pool({
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT
 })
-//module.exports = pool
+// module.exports = pool

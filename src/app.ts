@@ -1,26 +1,28 @@
+import express from 'express'
+import * as dotenv from 'dotenv'
+import loadContainer from './container'
+import { loadControllers } from 'awilix-express'
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 process.env.APP_ENV = process.env.APP_ENV || 'production'
 
-import express from "express";
-import * as dotenv from 'dotenv'
-import loadContainer from "./container";
-import { loadControllers } from "awilix-express";
+const app: express.Application = express()
+// json support
+app.use(express.json())
 
-const app: express.Application = express();
-
-//config envirotment
+// config envirotment
 dotenv.config({
-    path: `${__dirname}/../config/${process.env.APP_ENV}.env`
+  path: `${__dirname}` + '/../config/' + `${process.env.APP_ENV}.env`
 })
-console.log(process.env.CONN)
+// console.log(process.env.CONN)
 
-//container
+// container
 loadContainer(app)
 
-//controllers
+// controllers
 app.use(loadControllers(
-    'controllers/*.ts',
-    { cwd: __dirname }
+  'controllers/*.ts',
+  { cwd: __dirname }
 ))
 
 export { app }

@@ -1,0 +1,9 @@
+POST http://localhost:3000/subscriptions/ HTTP/1.1
+content-type: application/json
+
+{
+    "user_id": 1,
+    "code": "PPDDFFGG",
+    "amount": 130,
+    "cron": "0 0 12 8 1/1 ?"
+}
