@@ -14,7 +14,7 @@ app.use(express.json())
 dotenv.config({
   path: `${__dirname}` + '/../config/' + `${process.env.APP_ENV}.env`
 })
-// console.log(process.env.CONN)
+// console.log(process.env.MYSQLUSER)
 
 // container
 loadContainer(app)

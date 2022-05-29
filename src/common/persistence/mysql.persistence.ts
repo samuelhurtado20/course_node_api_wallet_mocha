@@ -1,9 +1,20 @@
-import { createPool } from 'mysql2/promise'
+// const { config } = require('dotenv')
+// config()
+const { createPool } = require('mysql2/promise')
+
+// console.log(process.env.MYSQLUSER)
+// export default createPool({
+//   user: process.env.PGUSER,
+//   host: process.env.PGHOST,
+//   database: process.env.PGDATABASE,
+//   password: process.env.PGPASSWORD,
+//   port: process.env.PGPORT
+// })
+// module.exports = pool
 
 export default createPool({
-  host: process.env.db_mysql_host,
-  user: process.env.db_mysql_user,
-  password: process.env.db_mysql_password,
-  database: process.env.db_mysql_database,
-  decimalNumbers: true
+  host: 'localhost',
+  user: 'root',
+  database: 'api_wallet',
+  password: 'sam18623'
 })

@@ -2,7 +2,7 @@ import express from 'express'
 import { createContainer, asClass } from 'awilix'
 import { TestService } from './services/test.service'
 import { scopePerRequest } from 'awilix-express'
-import { SubscriptionPgRepository } from './repositories/pg/subscription.repository'
+import { SubscriptionMysqlRepository } from './repositories/mysql/subscription.repository'
 import { SubscriptionService } from './services/subscription.service'
 import { MovementPgRepository } from './repositories/pg/movement.repository'
 import { BalancePgRepository } from './repositories/pg/balance.repository'
@@ -13,7 +13,7 @@ export default (app: express.Application) => {
 
   container.register({
     // repositories
-    subscriptionRepository: asClass(SubscriptionPgRepository).scoped(),
+    subscriptionRepository: asClass(SubscriptionMysqlRepository).scoped(),
     movementRepository: asClass(MovementPgRepository).scoped(),
     balanceRepository: asClass(BalancePgRepository).scoped(),
 

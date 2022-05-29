@@ -9,7 +9,7 @@ export class SubscriptionMysqlRepository implements ISubscriptionRepository {
   }
 
   public async find (id: number): Promise<Subscription | null> {
-    const [rows]: any[] = await db.execute('select * from wallet_subscription where id = $1',
+    const [rows]: any[] = await db.execute('select * from wallet_subscription where id = ?',
       [id])
     if (rows.length) {
       return rows[0] as Subscription
@@ -18,7 +18,7 @@ export class SubscriptionMysqlRepository implements ISubscriptionRepository {
   }
 
   public async findByUserAndCode (userId: number, code: string): Promise<Subscription | null> {
-    const [rows]:any[] = await db.execute('select * from wallet_subscription where user_id = $1 and code = $2', [userId, code])
+    const [rows]:any[] = await db.execute('select * from wallet_subscription where user_id = ? and code = ?', [userId, code])
     if (rows.length) {
       return rows[0] as Subscription
     }
@@ -26,19 +26,27 @@ export class SubscriptionMysqlRepository implements ISubscriptionRepository {
   }
 
   public async store (entry: Subscription): Promise<void> {
-    await db.execute('insert into wallet_subscription(user_id, code, amount, cron, created_at) values($1,$2,$3,$4,$5)',
-      [entry.userId, entry.code, entry.amount, entry.cron, new Date()])
+    await db.execute('insert into wallet_subscription(user_id, code, amount, cron, created_at) values(?,?,?,?,?)',
+      [entry.userId, entry.code, entry.amount, entry.cron, this.GetDateFormat()])
     // return rows as Subscription[]
   }
 
   public async update (entry: Subscription): Promise<void> {
-    const now = new Date(Date.now())
-    await db.execute('update wallet_subscription set user_id = $1, code = $2, amount = $3, cron = $4, updated_at = $5 where id = $6',
-      [entry.userId, entry.code, entry.amount, entry.cron, now, entry.id])
+    // const now = new Date(Date.now())
+    // await db.execute('update wallet_subscription set user_id = ?, code = ?, amount = ?, cron = ?, updated_at = ?, created_at = ? where id = ?',
+    //  [entry.userId, entry.code, entry.amount, entry.cron, now, entry.created_at, entry.id])
+    const query = `update wallet_subscription set code = '${entry.code}', amount = '${entry.amount}', cron = '${entry.cron}', updated_at = '${this.GetDateFormat()}' where id = ${entry.id}`
+
+    await db.query(query)
   }
 
   public async delete (id: Number): Promise<void> {
-    await db.execute('delete from wallet_subscription where id = $1',
+    await db.execute('delete from wallet_subscription where id = ?',
       [id])
+  }
+
+  private GetDateFormat () {
+    const date = new Date()
+    return date.toISOString().slice(0, 19).replace('T', ' ')
   }
 }
