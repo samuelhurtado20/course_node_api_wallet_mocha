@@ -3,9 +3,6 @@ import * as dotenv from 'dotenv'
 import loadContainer from './container'
 import { loadControllers } from 'awilix-express'
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'production'
-process.env.APP_ENV = process.env.APP_ENV || 'production'
-
 const app: express.Application = express()
 // json support
 app.use(express.json())
