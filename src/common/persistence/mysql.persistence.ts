@@ -1,20 +1,16 @@
-// const { config } = require('dotenv')
-// config()
-const { createPool } = require('mysql2/promise')
+import * as dotenv from 'dotenv'
+import { createPool } from 'mysql2/promise'
 
-// console.log(process.env.MYSQLUSER)
-// export default createPool({
-//   user: process.env.PGUSER,
-//   host: process.env.PGHOST,
-//   database: process.env.PGDATABASE,
-//   password: process.env.PGPASSWORD,
-//   port: process.env.PGPORT
-// })
-// module.exports = pool
+// config envirotment
+process.env.NODE_ENV = process.env.NODE_ENV || 'production'
+process.env.APP_ENV = process.env.APP_ENV || 'production'
+dotenv.config({
+  path: 'config/production.env'
+})
 
 export default createPool({
-  host: 'localhost',
-  user: 'root',
-  database: 'api_wallet',
-  password: 'sam18623'
+  user: process.env.MYSQLUSER as string,
+  host: process.env.MYSQLHOST,
+  database: process.env.MYSQLDATABASE,
+  password: process.env.MYSQLPASSWORD
 })
