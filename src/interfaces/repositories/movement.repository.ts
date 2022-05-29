@@ -6,7 +6,7 @@ export interface IMovementRepository {
 
     find(id: number): Promise<Movement | null>
 
-    findByUserId(userId: number): Promise<Movement | null>
+    // findByUserId(userId: number): Promise<Movement | null>
 
     store(entry: Movement): Promise<void>
 
