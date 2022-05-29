@@ -4,12 +4,12 @@ import { ISubscriptionRepository } from '../../interfaces/repositories/subscript
 
 export class SubscriptionMockRepository implements ISubscriptionRepository {
   public async all (): Promise<Subscription[]> {
-    const table = db.subscription as Subscription[]
+    const table = db.subscriptions as Subscription[]
     return Object.assign([...table])
   }
 
   public async find (id: number): Promise<Subscription | null> {
-    const table = db.subscription as Subscription[]
+    const table = db.subscriptions as Subscription[]
     const result = table.find(x => x.id === id)
     if (result) {
       return Object.assign({ ...result })
@@ -19,7 +19,7 @@ export class SubscriptionMockRepository implements ISubscriptionRepository {
   }
 
   public async findByUserAndCode (userId: number, code: string): Promise<Subscription | null> {
-    const table = db.subscription as Subscription[]
+    const table = db.subscriptions as Subscription[]
     const result = table.find(x => x.id === userId && x.code === code)
     if (result) {
       return Object.assign({ ...result })
@@ -29,7 +29,7 @@ export class SubscriptionMockRepository implements ISubscriptionRepository {
   }
 
   public async store (entry: Subscription): Promise<void> {
-    const table = db.subscription as Subscription[]
+    const table = db.subscriptions as Subscription[]
 
     db._subscriptionId++
     table.push({
@@ -44,7 +44,7 @@ export class SubscriptionMockRepository implements ISubscriptionRepository {
   }
 
   public async update (entry: Subscription): Promise<void> {
-    const table = db.subscription as Subscription[]
+    const table = db.subscriptions as Subscription[]
 
     const original = table.find(x => x.id === entry.id)
 
@@ -58,7 +58,7 @@ export class SubscriptionMockRepository implements ISubscriptionRepository {
   }
 
   public async delete (id: Number): Promise<void> {
-    const table = db.subscription as Subscription[]
-    db.subscription = table.filter(x => x.id === id) as any
+    const table = db.subscriptions as Subscription[]
+    db.subscriptions = table.filter(x => x.id === id) as any
   }
 }
