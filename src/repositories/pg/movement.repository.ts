@@ -1,5 +1,5 @@
 import db from '../../common/persistence/pg.persistence'
-import { Movement } from '../../domain/movement'
+import { Movement } from '../../interfaces/models/movement'
 import { IMovementRepository } from '../../interfaces/repositories/movement.repository'
 
 export class MovementPgRepository implements IMovementRepository {
