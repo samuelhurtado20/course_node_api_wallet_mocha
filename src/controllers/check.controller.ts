@@ -21,4 +21,12 @@ export class CheckController {
         this.testService.get()
       )
     }
+
+    @route('/userInfo')
+    @GET()
+    public user (req: Request, res: Response): void {
+      res.send(
+        (req as any).auth
+      )
+    }
 }
